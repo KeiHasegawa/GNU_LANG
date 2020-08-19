@@ -1,0 +1,13 @@
+#! /bin/csh -vxf
+
+if ( $#argv != 2 ) then
+  echo "usage $0 prefix target"
+  exit 1
+endif
+
+set PREFIX=$argv[1]
+set TARGET=$argv[2]
+
+foreach TOOL ( binutils-2.35 gdb-9.2 gcc-3.4.4 newlib-1.13.0 )
+  ./00_batch.sub.sub $TOOL $PREFIX $TARGET || exit 1
+end

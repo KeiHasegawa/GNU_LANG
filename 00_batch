@@ -1,0 +1,11 @@
+#! /bin/csh -vxf
+
+set PREFIX=/cygdrive/d/home/khasegawa/GNU_LANG
+foreach TARGET ( h8300-elf )
+  ./00_batch.sub $PREFIX $TARGET || exit 1
+  ./00_batch.verify $PREFIX $TARGET || exit 1
+end
+
+# TARGET m6811-elf : link error
+#foreach TARGET ( sh-elf h8300-elf arm-elf mips-elf m32r-elf v850-elf \
+#                 mcore-elf mn10300-elf ppc-elf mmix-elf )

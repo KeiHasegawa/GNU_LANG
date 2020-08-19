@@ -1,0 +1,31 @@
+#! /bin/csh -vxf
+
+if ( $#argv != 2 ) then
+  echo "usage $0 prefix target"
+  exit 1
+endif
+
+set PREFIX=$argv[1]
+set TARGET=$argv[2]
+
+if ( $TARGET == "mips-elf" ) then
+  set LD_FLAG=-Tidt.ld
+else if ( $TARGET == "mn10300-elf" ) then
+  set LD_FLAG=-Tsim.ld
+else if ( $TARGET == "ppc-elf" ) then
+  set LD_FLAG="$PREFIX/$TARGET/lib/sim-crt0.o -lc -lsim"
+else
+  set LD_FLAG=
+endif
+
+$TARGET-gcc -g -o 00_batch.verify.elf 00_batch.verify.c $LD_FLAG || exit 1
+
+$TARGET-gdb --silent -x 00_batch.verify.x \
+00_batch.verify.elf >& 00_batch.verify.$TARGET.log || exit 1
+
+perl 00_batch.verify.pl 00_batch.verify.$TARGET.log \
+                      > 00_batch.verify.$TARGET.log2
+
+diff 00_batch.verify.$TARGET.log2 00_batch.verify.lof || exit 1
+
+echo "verify $TARGET finish"

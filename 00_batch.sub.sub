@@ -1,0 +1,70 @@
+#! /bin/csh -vxf
+
+if ( $#argv != 3 ) then
+  echo "usage $0 archive prefix target"
+  exit 1
+endif
+
+set TOOL=$argv[1]
+set PREFIX=$argv[2]
+set TARGET=$argv[3]
+
+rm -r -f $TOOL
+if ( $TOOL == "binutils-2.35" ) then
+  xz -d -c $TOOL.tar.xz | tar xf -
+endif
+if ($TOOL == "gdb-9.2") then
+  xz -d -c $TOOL.tar.xz | tar xf -
+endif  
+if ($TOOL == "gcc-3.4.4") then
+  bunzip2 -c $TOOL.tar.bz2 | tar xf - 
+endif  
+if ( $TOOL == "newlib-1.13.0" ) then
+  gunzip -c $TOOL.tar.gz | tar xf -
+endif
+
+cd $TOOL || exit 1
+
+if ( $TOOL == "binutils-2.35" ) then
+  ./configure --prefix=$PREFIX --target=$TARGET || exit 1
+endif
+if ( $TOOL == "gdb-9.2" ) then
+  mkdir build-$TARGET || exit 1
+  cd build-$TARGET || exit 1
+  ../configure --prefix=$PREFIX --target=$TARGET || exit 1
+endif
+if ( $TOOL == "gcc-3.4.4" ) then
+  cp -f ../config.guess .
+  ./configure --prefix=$PREFIX --target=$TARGET --with-newlib || exit 1
+endif
+if ( $TOOL == "newlib-1.13.0" ) then
+  cp -f ../config.guess .
+  ./configure --prefix=$PREFIX --target=$TARGET || exit 1
+endif
+
+mv makefile d:/tmp/Makefile || exit 1
+mv d:/tmp/Makefile . || exit 1
+
+#if ( $TOOL == "gdb-9.2" && $TARGET == "v850-elf" ) then
+#  make all
+#  gcc -g -O2 -o gdb.exe $PREFIX/00_batch.sub.sub.gdb-6.0.v850-add.c \
+#  gdb.o main.o v850ice.o cli-dump.o cli-decode.o cli-script.o \
+#  cli-cmds.o cli-setshow.o cli-utils.o cli-logging.o cli-interp.o \
+#  mi-out.o mi-console.o mi-cmds.o mi-cmd-env.o mi-cmd-var.o \
+#  mi-cmd-break.o mi-cmd-stack.o mi-cmd-file.o mi-cmd-disas.o \
+#  mi-symbol-cmds.o mi-interp.o mi-main.o mi-parse.o mi-getopt.o libgdb.a \
+#  ../sim/v850/libsim.a ../bfd/libbfd.a ../readline/libreadline.a \
+#  ../opcodes/libopcodes.a ./../intl/libintl.a ../libiberty/libiberty.a \
+#  -ltermcap -lm -liconv  ../libiberty/libiberty.a -luser32
+#endif
+
+#if ( $TOOL == "newlib-1.13.0" && $TARGET == "m32r-elf" ) then
+#  mkdir $PREFIX/newlib-1.13.0/gdb
+#  cp $PREFIX/{gdb-6.0,newlib-1.13.0}/gdb/m32r-stub.c
+#endif
+
+if ( $TOOL == "gcc-3.4.4" ) then
+  make -w all-gcc install-gcc LANGUAGES="c c++" || exit 1
+else
+  make all install || exit 1
+endif
