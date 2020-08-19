@@ -29,6 +29,7 @@ if ( $TOOL == "binutils-2.35" ) then
   ./configure --prefix=$PREFIX --target=$TARGET || exit 1
 endif
 if ( $TOOL == "gdb-9.2" ) then
+  cp -f ../cp-support.c gdb/cp-support.c
   mkdir build-$TARGET || exit 1
   cd build-$TARGET || exit 1
   ../configure --prefix=$PREFIX --target=$TARGET || exit 1
