@@ -1,0 +1,41 @@
+Reading symbols from 00_batch.verify.elf...
+Connected to the simulator.
+Loading section .init, size 0x36 lma 0x1000
+Loading section .text, size 0x85b8 lma 0x1038
+Loading section .fini, size 0x2a lma 0x95f0
+Loading section .rodata, size 0x350 lma 0x961c
+Loading section .eh_frame, size 0x98 lma 0x99ec
+Loading section .ctors, size 0x8 lma 0x9a84
+Loading section .dtors, size 0x8 lma 0x9a8c
+Loading section .jcr, size 0x4 lma 0x9a94
+Loading section .data, size 0x830 lma 0x9a98
+Loading section .got, size 0xc lma 0xa2c8
+Loading section .stack, size 0x4 lma 0x3fffff00
+Start address 0x1038
+Transfer rate: 299680 bits/sec.
+Breakpoint 1 at 0x112a: file 00_batch.verify.c, line 5.
+
+Breakpoint 1, main () at 00_batch.verify.c:5
+5	  printf("hello world\n");
+Dump of assembler code for function main:
+   0x00001124 <+0>:	mov.l	r14,@-r15
+   0x00001126 <+2>:	sts.l	pr,@-r15
+   0x00001128 <+4>:	mov	r15,r14
+=> 0x0000112a <+6>:	mov.l	0x1140 <main+28>,r1	! 0x961c
+   0x0000112c <+8>:	mov	r1,r4
+   0x0000112e <+10>:	mov.l	0x1144 <main+32>,r1	! 0x11c4 <printf>
+   0x00001130 <+12>:	jsr	@r1
+   0x00001132 <+14>:	nop	
+   0x00001134 <+16>:	mov	#0,r0
+   0x00001136 <+18>:	mov	r14,r15
+   0x00001138 <+20>:	lds.l	@r15+,pr
+   0x0000113a <+22>:	mov.l	@r15+,r14
+   0x0000113c <+24>:	rts	
+   0x0000113e <+26>:	nop	
+   0x00001140 <+28>:	.word 0x0000
+   0x00001142 <+30>:	mov.w	0x117e <exit+26>,r6	! 0xd106
+   0x00001144 <+32>:	.word 0x0000
+   0x00001146 <+34>:	mov.l	r12,@(16,r1)
+End of assembler dump.
+hello world
+[Inferior 1 (process 42000) exited normally]

@@ -3,6 +3,8 @@ https://ftp.gnu.org/gnu/gdb/gdb-9.2.tar.xz
 https://ftp.gnu.org/gnu/gcc/gcc-3.4.4/gcc-3.4.4.tar.bz2
 ftp://sourceware.org/pub/newlib/newlib-1.13.0.tar.gz
 
+ftp://sourceware.org/pub/newlib/newlib-3.3.0.tar.gz
+
 https://ftp.gnu.org/gnu/gdb/gdb-5.2.1.tar.gz
 https://ftp.gnu.org/gnu/gdb/gdb-5.3.tar.gz
 https://ftp.gnu.org/gnu/gdb/gdb-6.0a.tar.bz2
