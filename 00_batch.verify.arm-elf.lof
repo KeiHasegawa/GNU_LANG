@@ -1,0 +1,30 @@
+Reading symbols from 00_batch.verify.elf...
+Connected to the simulator.
+Loading section .init, size 0x1c lma 0x8000
+Loading section .text, size 0x9248 lma 0x801c
+Loading section .fini, size 0x18 lma 0x11264
+Loading section .rodata, size 0x224 lma 0x1127c
+Loading section .eh_frame, size 0x4 lma 0x214a0
+Loading section .ctors, size 0x8 lma 0x214a4
+Loading section .dtors, size 0x8 lma 0x214ac
+Loading section .jcr, size 0x4 lma 0x214b4
+Loading section .data, size 0x940 lma 0x214b8
+Start address 0x8110
+Transfer rate: 323520 bits in <1 sec.
+Breakpoint 1 at 0x8224: file 00_batch.verify.c, line 5.
+
+Breakpoint 1, main () at 00_batch.verify.c:5
+5	  printf("hello world\n");
+Dump of assembler code for function main:
+   0x00008218 <+0>:	mov	r12, sp
+   0x0000821c <+4>:	push	{r11, r12, lr, pc}
+   0x00008220 <+8>:	sub	r11, r12, #4
+=> 0x00008224 <+12>:	ldr	r0, [pc, #12]	; 0x8238 <main+32>
+   0x00008228 <+16>:	bl	0x8330 <printf>
+   0x0000822c <+20>:	mov	r3, #0
+   0x00008230 <+24>:	mov	r0, r3
+   0x00008234 <+28>:	ldm	sp, {r11, sp, pc}
+   0x00008238 <+32>:	andeq	r1, r1, r12, ror r2
+End of assembler dump.
+hello world
+[Inferior 1 (process 42000) exited normally]
