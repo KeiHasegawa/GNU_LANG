@@ -1,0 +1,24 @@
+Reading symbols from 00_batch.verify.elf...
+Connected to the simulator.
+Loading section .text, size 0x66c2 lma 0x4
+Loading section .rodata, size 0x318 lma 0x66c8
+Loading section .rodata.str1.1, size 0x9c lma 0x69e0
+Loading section .data, size 0x82c lma 0x6a7c
+Start address 0x4
+Transfer rate: 234768 bits in <1 sec.
+Breakpoint 1 at 0x41: file 00_batch.verify.c, line 5.
+
+Breakpoint 1, main () at 00_batch.verify.c:5
+5	  printf("hello world\n");
+Dump of assembler code for function main:
+   0x0000003b <+0>:	movm	[a3],(sp)
+   0x0000003d <+2>:	mov	sp,a3
+   0x0000003e <+3>:	add	-12,sp
+=> 0x00000041 <+6>:	mov	26312,d0
+   0x00000047 <+12>:	call	0xa6 <printf>,[],0
+   0x0000004e <+19>:	clr	d0
+   0x0000004f <+20>:	mov	a3,sp
+   0x00000051 <+22>:	ret	[a3],4
+End of assembler dump.
+hello world
+[Inferior 1 (process 42000) exited normally]
